@@ -38,6 +38,7 @@ def tex_to_html_inline(s: str) -> str:
     s = re.sub(r"\\color\{[^}]+\}\s*",   "",              s)
     s = re.sub(r"\\small\s*",            "",              s)
     s = re.sub(r"\{([^{}]*)\}",          r"\1",           s)  # strip remaining braces
+    s = re.sub(r"[{}]",                  "",              s)  # strip any leftover stray braces
     s = s.replace("\\ ", " ")
     s = s.replace("\\,", "\u202f")   # narrow no-break space
     s = s.replace("\\;", " ")
