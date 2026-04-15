@@ -1,0 +1,278 @@
+\documentclass[a4paper,10pt]{article}
+
+% ─── Packages ────────────────────────────────────────────────────────────────
+\usepackage[a4paper, top=1.5cm, bottom=1.5cm, left=1.2cm, right=1.8cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[scaled=0.93]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amssymb}
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens}
+\usepackage{microtype}
+\linespread{1.10}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{parskip}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{paracol}
+
+% ─── Colours ─────────────────────────────────────────────────────────────────
+\definecolor{headerbg}{HTML}{12343B}     % deep teal-navy (header)
+\definecolor{accent}{HTML}{0F7F74}       % vivid medical teal
+\definecolor{accentlight}{HTML}{7DC8C2}  % soft teal for rules
+\definecolor{sidebarbg}{HTML}{EAF4F3}    % very light teal tint
+\definecolor{dark}{HTML}{1C2B2B}         % near-black for body text
+\definecolor{muted}{HTML}{4A6E6A}        % muted teal-grey
+
+% ─── Hyperref setup ──────────────────────────────────────────────────────────
+\hypersetup{colorlinks=false, hidelinks}
+
+% ─── No page numbers ─────────────────────────────────────────────────────────
+\pagestyle{empty}
+
+% ─── Allow TeX more stretch to avoid overfull boxes ──────────────────────────
+\setlength{\emergencystretch}{3em}
+
+% ─── Helper macros ───────────────────────────────────────────────────────────
+% Section heading for the RIGHT column — accent bar left + rule
+\newcommand{\rsection}[1]{%
+  \vspace{12pt}%
+  \noindent{\color{accent}\vrule width 4pt height 1.15em depth 0.25ex}\hspace{8pt}{\large\bfseries\color{dark} #1}\\[-6pt]%
+  {\color{accentlight}\rule{\linewidth}{0.7pt}}%
+  \vspace{5pt}%
+}
+
+% Section heading for the LEFT column — uppercase small caps style
+\newcommand{\lsection}[1]{%
+  \vspace{6pt}%
+  {\footnotesize\bfseries\color{accent}\MakeUppercase{#1}}\\[-3pt]%
+  {\color{accentlight}\rule{\linewidth}{0.5pt}}%
+  \vspace{3pt}%
+}
+
+% Experience entry
+\newcommand{\expentry}[4]{%
+  % #1 = Job title  #2 = Company | Country  #3 = Dates  #4 = description
+  \noindent{\bfseries\color{accent} #1}\hfill{\small\color{muted}\textit{#3}}\\
+  {\small\bfseries\color{dark} #2}%
+  \ifx&#4&\else
+    \vspace{3pt}\begin{itemize}[leftmargin=1.4em, itemsep=2pt, topsep=2pt, parsep=0pt]
+      #4
+    \end{itemize}
+  \fi
+  \vspace{7pt}%
+}
+
+% Education entry
+\newcommand{\eduentry}[4]{%
+  % #1 = Degree  #2 = Institution | Country  #3 = Year  #4 = description
+  \noindent{\bfseries\color{dark} #1}\hfill{\small\color{muted}\textit{#3}}\\
+  {\small\color{muted} #2}%
+  \ifx&#4&\else
+    \vspace{2pt}{\small\color{dark} #4}%
+  \fi
+  \vspace{7pt}%
+}
+
+% Skill row — coloured square bullet
+\newcommand{\skillitem}[1]{%
+  \noindent{\color{accent}\footnotesize$\blacksquare$}\hspace{5pt}{\small\color{dark} #1}\par\vspace{1pt}%
+}
+
+% Language row
+\newcommand{\langitem}[2]{%
+  \noindent{\small\bfseries\color{dark} #1}\hspace*{\fill}{\small\color{muted} #2}\par\vspace{2pt}%
+}
+
+% ─── Document ────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════════
+%  HEADER
+% ═══════════════════════════════════════════════════════════════════════
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[headerbg] (current page.north west) rectangle ++(\paperwidth, -2.8cm);
+  % Accent teal strip along bottom of header
+  \fill[accent] (current page.north west) ++(0,-2.7cm) rectangle ++(\paperwidth, -0.12cm);
+\end{tikzpicture}
+
+\vspace{-1.5cm}%
+\noindent
+\makebox[\textwidth][l]{%
+  \hspace{0.4cm}%
+  \begin{minipage}[c]{1.8cm}
+    \centering
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+      \begin{scope}
+        \clip (0,0) circle (0.85cm);
+        \node[inner sep=0] at (0,0) {\includegraphics[width=1.7cm]{resources/photo}};
+      \end{scope}
+      \draw[accent, line width=1.8pt] (0,0) circle (0.85cm);
+    \end{tikzpicture}
+  \end{minipage}%
+  \hspace{0.5cm}%
+  \begin{minipage}[c]{0.72\textwidth}
+    \raggedright
+    {\Huge\bfseries\color{white} Marion Holvoet}\\[5pt]
+    \raisebox{0.6ex}{\color{accentlight}\rule{4cm}{0.8pt}}\\[4pt]
+    {\Large\color{white!85!headerbg} Software Engineer\ \textbar\ Architecture \& MedTech Systems}
+  \end{minipage}%f
+}%
+\vspace{1.2cm}
+
+% ═══════════════════════════════════════════════════════════════════════
+%  TWO-COLUMN BODY (paracol: 35% left | 65% right)
+% ═══════════════════════════════════════════════════════════════════════
+\columnratio{0.33}
+\setlength{\columnsep}{0.6cm}
+\begin{paracol}{2}
+\setlength{\parskip}{0pt}\setlength{\parindent}{0pt}
+
+% ───────────────────────────────────────────────
+%  LEFT COLUMN
+% ───────────────────────────────────────────────
+\backgroundcolor{c[0](1pt,1pt)(0.5\columnsep,1pt)}{sidebarbg}
+
+% -- Profile ------------------------------------------------
+\lsection{Profile}
+{\small\color{dark}
+Software Engineer with M.Sc.\ in Medical Device
+Engineering and iSAQB\,CPSA-F certification.
+Specialised in software architecture, embedded
+systems, and backend development in quality-critical environments.
+Trilingual. Willing to travel.
+}
+
+% -- Contact ------------------------------------------------
+\lsection{Contact}
+\noindent{\small\faPhone\ +33\,(0)6\,09\,02\,33\,50}\par
+\vspace{2pt}%
+\noindent{\small\faEnvelope\ \href{mailto:holvoet.marion@gmail.com}{holvoet.marion@gmail.com}}\par
+\vspace{2pt}%
+\noindent{\small\faLinkedin\ \href{https://linkedin.com/in/marion-holvoet-713724140}{linkedin/marionholvoet}}\par
+
+% -- Languages ----------------------------------------------
+\lsection{Languages}
+\langitem{English}{Native}
+\langitem{French}{Native}
+\langitem{German}{A2}
+
+% -- Certifications -----------------------------------------
+\lsection{Certifications}
+{\small\color{dark}\textbf{iSAQB\textregistered{} CPSA-F}\par
+\vspace{1pt}%
+\color{muted}Certified Professional for\\Software Architecture\\Foundation Level\\[2pt]
+\textit{Issued: September 2024}}
+
+% -- Key Skills ---------------------------------------------
+\lsection{Key Skills}
+\skillitem{C++ / Go / Python / JavaScript}
+\skillitem{Software Architecture}
+\skillitem{System Design}
+\skillitem{Embedded Linux / ARM / x86}
+\skillitem{CMake / Git / Docker}
+\skillitem{Yocto / Mender / Boost}
+\skillitem{RESTful APIs / HTTPS}
+\skillitem{GoogleTest / Pytest / CI/CD}
+\skillitem{Qt / Svelte / HDF5}
+
+% -- Personal Traits ----------------------------------------
+\lsection{Personal Traits}
+\skillitem{Positive thinker}
+\skillitem{Solution-oriented mindset}
+\skillitem{Independent and hardworking}
+\skillitem{Clear communicator}
+\skillitem{Fast learner}
+\skillitem{Quality-focused}
+\skillitem{Collaborative team player}
+
+% ───────────────────────────────────────────────
+%  RIGHT COLUMN
+% ───────────────────────────────────────────────
+\switchcolumn
+
+% -- Professional Experience --------------------------------
+\rsection{Professional Experience}
+
+\expentry{Software Engineer}{Metrolab Technology SA\,|\,Switzerland}{October 2023 -- Present}{%
+  \item \textbf{Architecture \& System Design:} Contributed to software architecture discussions; authored an architecture document for an innovative development system, covering design decisions, scalability, and long-term maintainability.
+  \item \textbf{Embedded \& Backend Development:} Firmware and backend components in C++ for production deployment; custom Linux images with Yocto; signal processing with Boost libraries.
+  \item \textbf{Cross-Platform Systems:} Extended a C++/Qt application; managed multi-platform builds across Linux, ARM, and x86 architectures.
+  \item \textbf{Tooling \& Practices:} Version control with Git and Perforce; contributed to migration from Perforce to Git; CMake-based build systems.
+}
+
+\expentry{Software Engineer}{Spacetek Technology AG\,|\,Switzerland}{April 2021 -- September 2023}{%
+  \item Embedded software development in C and C++ with CMake; custom Linux images with Yocto; OTA deployment with Mender.
+  \item RESTful API development in Go over HTTPS; data lake management with HDF5.
+  \item Real-time signal processing in Python and C++ for noisy signals; SDK development.
+  \item Front-end development with Qt (C++) and Svelte (JavaScript).
+  \item Testing with GoogleTest and Pytest; GitLab CI/CD pipelines.
+}
+
+\expentry{Research Engineer}{Ottobock\,|\,Germany}{September 2020 -- March 2021}{%
+  \item Closed-loop motor control for high-end prosthetics in C++, Python, and Node.js.
+  \item Sensor network data acquisition (temperature, pressure, current via Modbus and I\textsuperscript{2}C) with machine-learning-based analysis.
+}
+
+\expentry{Software Engineering Intern}{Ottobock\,|\,Germany}{February -- August 2020}{%
+  \item Python GUI for a large-scale 3D printer: extrusion calibration, pressure sensor monitoring, and step motor control via Bluetooth to an ARM\,M4 microcontroller (C++).
+}
+
+\expentry{Research Intern}{INRIA -- LIRMM\,|\,France}{April -- July 2019}{%
+  \item Wearable smartwatch application (Tizen) for data acquisition; quantification and analysis of Parkinson's-related tremor.
+}
+
+% -- Education ----------------------------------------------
+\rsection{Education}
+
+\eduentry{M.Eng.\ Biomedical / Medical Device Engineering}{Montpellier University\,|\,France}{2015 -- 2020}{%
+  Master of Engineering in Medical Device Engineering -- Digital Sciences for Health. Specialised in Health Device Engineering.
+}
+
+\eduentry{B.Sc.\ Electronic Engineering}{Montpellier University\,|\,France}{2015 -- 2018}{%
+  Bachelor's degree in Electronic Engineering. Capstone: STM32-controlled spider robot (mechanics, electronics, and firmware).
+}
+
+\eduentry{Scientific Baccalaureate}{Montpellier\,|\,France}{2011}{%
+  Majoring in Physics and Chemistry.
+}
+
+% -- Certifications (right column) --------------------------
+\rsection{Certifications}
+
+\noindent{\bfseries\color{accent} iSAQB\textregistered{} Certified Professional for Software Architecture}\hfill{\small\color{muted}\textit{September 2024}}\\
+{\small\bfseries\color{dark} Foundation Level (CPSA-F)}\par
+\vspace{4pt}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt, topsep=2pt, parsep=0pt]
+  {\small\color{dark}
+  \item Software architecture basics and the role and tasks of software architects
+  \item Architecture requirements, architecture goals, and non-functional quality goals
+  \item Components, building blocks, interfaces, and dependencies
+  \item Cross-cutting concerns and technical concepts
+  \item Documentation and communication of architectures
+  }
+\end{itemize}
+\vspace{4pt}
+
+% -- Hobbies ------------------------------------------------
+\rsection{Hobbies}
+{\small\color{dark} Rock Climbing\enskip\textperiodcentered\enskip Hiking\enskip\textperiodcentered\enskip Skiing / Snowboarding\enskip\textperiodcentered\enskip Drums}
+
+\vspace{6pt}
+
+% -- Other --------------------------------------------------
+\rsection{Other}
+{\small\color{dark}
+\textbf{Nationalities:} France, New Zealand, United States of America.\\[2pt]
+\textbf{Permits:} Driver's Licence.
+}
+
+\end{paracol}
+\end{document}
