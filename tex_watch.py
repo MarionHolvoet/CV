@@ -1,5 +1,5 @@
 """
-tex_watch.py  —  Watch CV_Marion_Holvoet.tex and regenerate CV_Marion_Holvoet.html on every save.
+tex_watch.py  —  Watch CV_Marion_Holvoet.tex and regenerate index.html on every save.
 
 Usage:
     python tex_watch.py            # watch and regenerate on change
@@ -16,7 +16,7 @@ import textwrap
 from pathlib import Path
 
 TEX_FILE  = Path(__file__).parent / "CV_Marion_Holvoet.tex"
-HTML_FILE = Path(__file__).parent / "CV_Marion_Holvoet.html"
+HTML_FILE = Path(__file__).parent / "index.html"
 
 # ─── TeX → plain-text helpers ────────────────────────────────────────────────
 
@@ -24,8 +24,9 @@ def tex_to_html_inline(s: str) -> str:
     """Convert inline TeX markup to HTML."""
     # Strip TeX line comments (% ... end-of-line), but not escaped \%
     s = re.sub(r"(?<!\\)%[^\n]*", "", s)
-    s = s.replace("\\&", "&amp;")
-    s = s.replace("&", "&amp;")
+    s = s.replace("\\&", "\x00AMP\x00")   # protect TeX \& with a placeholder
+    s = s.replace("&", "&amp;")            # escape any bare &
+    s = s.replace("\x00AMP\x00", "&amp;")  # restore placeholder as &amp;
     s = s.replace("\\textregistered{}", "®")
     s = s.replace("\\textregistered",   "®")
     s = s.replace("\\textsuperscript{2}", "<sup>2</sup>")
@@ -164,7 +165,14 @@ def _parse_left(text: str) -> dict:
     if m:
         raw = re.sub(r"\{\\small\\color\{dark\}\s*", "", m.group(1))
         raw = re.sub(r"\}", "", raw, count=1)
-        result["profile"] = strip_tex(raw).replace("\n", " ").strip()
+        # Convert \par into a paragraph break placeholder before stripping TeX
+        raw = re.sub(r"\\par\\vspace\{[^}]+\}\s*", "\x00PAR\x00", raw)
+        raw = re.sub(r"\\par\b\s*", "\x00PAR\x00", raw)
+        # Collapse plain newlines to spaces (within a paragraph), then restore breaks
+        paragraphs = raw.split("\x00PAR\x00")
+        paragraphs = [strip_tex(p).replace("\n", " ").strip() for p in paragraphs]
+        paragraphs = [p for p in paragraphs if p]
+        result["profile"] = "<br/><br/>".join(paragraphs)
 
     # Contact items — phone, email, linkedin
     phone_m = re.search(r"\\faPhone\\\s*(.*?)\}?\\par", text)
@@ -302,10 +310,10 @@ FR = {
     "Personal Traits":"Qualités Personnelles",
     # profile paragraph
     "profile": (
-        "Ingénieure logiciel avec un M.Eng. en Ingénierie des Dispositifs Médicaux "
-        "et la certification iSAQB&nbsp;CPSA-F. Spécialisée en architecture logicielle, systèmes embarqués "
-        "et développement backend dans des environnements à exigences qualité élevées. "
-        "Trilingue. Mobilité géographique."
+        "Ingénieure logiciel spécialisée dans les systèmes embarqués et backend, avec un Master en "
+        "Ingénierie des Dispositifs Médicaux et la certification iSAQB&nbsp;CPSA-F. Axée sur l'architecture "
+        "logicielle, la conception système et le développement rigoureux dans des environnements à exigences "
+        "qualité élevées.<br/><br/>"
     ),
     # language names / levels
     "English": "Anglais",  "French": "Français",  "German": "Allemand",
@@ -1138,9 +1146,9 @@ def render_html(data: dict) -> str:
     }}
 
     /* ── Print styles ───────────────────────────────────────────────── */
-    @page {{ margin: 0; }}
+    @page {{ margin: 1.5cm 1.8cm 1.5cm 1.2cm; }}
     @media print {{
-      body {{ background: #fff; padding: 0.6cm; print-color-adjust: exact; -webkit-print-color-adjust: exact; }}
+      body {{ background: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }}
       .page {{ box-shadow: none; max-width: 100%; }}
       .lang-toggle {{ display: none; }}
       a, a:visited {{
