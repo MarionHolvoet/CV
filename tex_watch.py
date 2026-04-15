@@ -22,6 +22,8 @@ HTML_FILE = Path(__file__).parent / "CV_Marion_Holvoet.html"
 
 def tex_to_html_inline(s: str) -> str:
     """Convert inline TeX markup to HTML."""
+    # Strip TeX line comments (% ... end-of-line), but not escaped \%
+    s = re.sub(r"(?<!\\)%[^\n]*", "", s)
     s = s.replace("\\&", "&amp;")
     s = s.replace("&", "&amp;")
     s = s.replace("\\textregistered{}", "®")
@@ -72,6 +74,12 @@ def extract_args(text: str, n: int) -> tuple[list[str], str]:
             args.append("")
             continue
         pos += 1  # skip opening '{'
+        # Skip a TeX line comment immediately after '{' (e.g. '{%\n  content…')
+        if pos < len(text) and text[pos] == "%":
+            while pos < len(text) and text[pos] != "\n":
+                pos += 1
+            if pos < len(text):
+                pos += 1  # consume the newline
         depth = 1
         start = pos
         while pos < len(text) and depth > 0:
@@ -99,10 +107,11 @@ def parse_tex(tex_path: Path) -> dict:
 
     # ── Header ───────────────────────────────────────────────────────────────
     name_m    = re.search(r"\\bfseries\\color\{white\}\s*([^\}\\]+)", body)
-    subtitle_m = re.search(r"\\Large\\color\{[^}]+\}\s*([^\}\\]+)", body)
+    subtitle_m = re.search(r"\\Large\\color\{[^}]+\}\s*((?:[^\}\\]|\\.)*)", body)
     name     = name_m.group(1).strip()    if name_m    else "Marion Holvoet"
     subtitle = subtitle_m.group(1).strip() if subtitle_m else ""
-    subtitle = subtitle.replace("\\textbar", "|").replace("\\ ", " ").strip()
+    subtitle = subtitle.replace("\\textbar", "|").replace("\\ ", " ").replace("\\&", "&").strip()
+    subtitle = re.sub(r"  +", " ", subtitle)
 
     # ── Split into LEFT / RIGHT columns ──────────────────────────────────────
     switch_pos = body.find("\\switchcolumn")
@@ -682,7 +691,8 @@ def render_html(data: dict) -> str:
     other_fr = FR["other_fr"]
 
     # ── Subtitle ──────────────────────────────────────────────────────────────
-    subtitle_en = data["subtitle"].replace("\\textbar", "|").replace("|", "&nbsp;|&nbsp;").replace("&", "&amp;")
+    _sub = data["subtitle"]
+    subtitle_en = _sub.replace("&", "&amp;").replace("|", "&nbsp;|&nbsp;")
     subtitle_fr = FR["subtitle"]
 
     # ══════════════════════════════════════════════════════════════════════════
