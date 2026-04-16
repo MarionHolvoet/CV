@@ -374,7 +374,7 @@ FR = {
         "Metrolab Technology SA": [
             "<b>Architecture &amp; Conception Système :</b> Participation aux discussions d'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, la scalabilité et la maintenabilité à long terme.",
             "<b>Développement Embarqué &amp; Backend :</b> Composants firmware et backend en C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
-            "<b>Systèmes Multi-Plateformes :</b> Extension d'une application C++/Qt. Gestion des builds multi-plateformes sous Linux, ARM et x86.",
+            "<b>Systèmes Multi-Plateformes :</b> Extension d'une application C++/Qt. Gestion des builds multi-plateformes sous Linux / Windows / MacOS sur ARM et x86.",
             "<b>Outils &amp; Pratiques :</b> Gestion de versions avec Git et Perforce. Contribution à la migration de Perforce vers Git et accompagnement de la transition des workflows. Environnements de développement Linux avec des systèmes de build basés sur CMake. Initiation de pipelines CI/CD avec des images Docker personnalisées.",
         ],
         "Spacetek Technology AG": [
