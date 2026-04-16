@@ -329,10 +329,11 @@ FR = {
         "Conception Système",
         "Embedded Linux / ARM / x86",
         "CMake / Git / Docker",
-        "Yocto / Mender / Boost",
-        "RESTful APIs / HTTPS",
+        "Yocto / Mender",
+        "REST API / HTTPS",
         "GoogleTest / Pytest / CI/CD",
         "Qt / Svelte / HDF5",
+        "GitHub Copilot",
     ],
     "traits_fr": [
         "Pensée positive",
@@ -371,17 +372,17 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture &amp; Conception Système :</b> Participation aux discussions d'architecture logicielle ; rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, la scalabilité et la maintenabilité à long terme.",
-            "<b>Développement Embarqué &amp; Backend :</b> Composants firmware et backend en C++ pour le déploiement en production ; images Linux personnalisées avec Yocto ; traitement du signal avec les bibliothèques Boost.",
-            "<b>Systèmes Multi-Plateformes :</b> Extension d'une application C++/Qt ; gestion des builds multi-plateformes sous Linux, ARM et x86.",
-            "<b>Outils &amp; Pratiques :</b> Gestion de versions avec Git et Perforce ; contribution à la migration de Perforce vers Git ; systèmes de build basés sur CMake.",
+            "<b>Architecture &amp; Conception Système :</b> Participation aux discussions d'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, la scalabilité et la maintenabilité à long terme.",
+            "<b>Développement Embarqué &amp; Backend :</b> Composants firmware et backend en C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
+            "<b>Systèmes Multi-Plateformes :</b> Extension d'une application C++/Qt. Gestion des builds multi-plateformes sous Linux, ARM et x86.",
+            "<b>Outils &amp; Pratiques :</b> Gestion de versions avec Git et Perforce. Contribution à la migration de Perforce vers Git. Systèmes de build basés sur CMake.",
         ],
         "Spacetek Technology AG": [
-            "Développement logiciel embarqué en C et C++ avec CMake ; images Linux personnalisées avec Yocto ; déploiement OTA avec Mender.",
-            "Développement d'API RESTful en Go via HTTPS ; gestion de lac de données avec HDF5.",
-            "Traitement du signal en temps réel en Python et C++ pour signaux bruités ; développement de SDK.",
+            "Développement logiciel embarqué en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
+            "Développement d'API RESTful en Go via HTTPS. Gestion de lac de données avec HDF5.",
+            "Traitement du signal en temps réel en Python et C++ pour signaux bruités. Développement de SDK.",
             "Développement front-end avec Qt (C++) et Svelte (JavaScript).",
-            "Tests avec GoogleTest et Pytest ; pipelines CI/CD GitLab.",
+            "Tests avec GoogleTest et Pytest. Pipelines CI/CD GitLab.",
         ],
         "Ottobock_1": [  # Sept 2020 – March 2021
             "Contrôle moteur en boucle fermée pour prothèses haut de gamme en C++, Python et Node.js.",
@@ -391,7 +392,7 @@ FR = {
             "Interface graphique Python pour une imprimante 3D grand format : calibration de l'extrusion, surveillance des capteurs de pression et contrôle des moteurs pas à pas via Bluetooth vers un microcontrôleur ARM\u202fM4 (C++).",
         ],
         "INRIA": [
-            "Application smartwatch portable (Tizen) pour l'acquisition de données ; quantification et analyse des tremblements liés à la maladie de Parkinson.",
+            "Application smartwatch portable (Tizen) pour l'acquisition de données. Quantification et analyse des tremblements liés à la maladie de Parkinson.",
         ],
     },
     # education degree FR

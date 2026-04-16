@@ -10,7 +10,7 @@ Single-file bilingual CV (English / French) generated from a LaTeX source.
 
 **Architecture:**
 
-![Architecture diagram](./Live-CV-Arch.jpg)
+![Architecture diagram](./resources/Live-CV-Arch.jpg)
 
 | File | Role |
 |---|---|
@@ -67,10 +67,18 @@ GitHub Pages will automatically redeploy at `https://marionholvoet.github.io/CV/
 The Go server exposes the CV at `/marion` and handles a GitHub webhook at `/exit`
 for graceful remote restarts.
 
+Linux:
 ```bash
 cd src/resources
 go build -o main main.go
 ./main          # starts on :12345
+```
+
+Windows:
+```bash
+cd src/resources
+go build -o main main.go
+main.exe   # starts on :12345
 ```
 
 Set the `GITHUB_WEBHOOK_SECRET` environment variable to validate webhook calls.
