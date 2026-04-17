@@ -870,7 +870,17 @@
 
 <script>
   let currentLang = 'en';
-  function downloadPDF() { window.print(); }
+  function downloadPDF() {
+    // In-app browsers (LinkedIn, Instagram, etc.) block window.print().
+    // Detect them and redirect to the real browser instead.
+    const ua = navigator.userAgent || '';
+    const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
+    if (inApp || typeof window.print !== 'function') {
+      window.open(window.location.href, '_blank');
+    } else {
+      window.print();
+    }
+  }
   function toggleLang() {
     currentLang = currentLang === 'en' ? 'fr' : 'en';
     if (currentLang === 'fr') {

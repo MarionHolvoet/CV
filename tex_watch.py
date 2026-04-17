@@ -713,6 +713,9 @@ def render_html(data: dict) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Marion Holvoet — CV</title>
   <style>
     /* ── Reset & Base ──────────────────────────────────────────────── */
@@ -1337,7 +1340,17 @@ def render_html(data: dict) -> str:
 
 <script>
   let currentLang = 'en';
-  function downloadPDF() {{ window.print(); }}
+  function downloadPDF() {{
+    // In-app browsers (LinkedIn, Instagram, etc.) block window.print().
+    // Detect them and redirect to the real browser instead.
+    const ua = navigator.userAgent || '';
+    const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
+    if (inApp || typeof window.print !== 'function') {{
+      window.open(window.location.href, '_blank');
+    }} else {{
+      window.print();
+    }}
+  }}
   function toggleLang() {{
     currentLang = currentLang === 'en' ? 'fr' : 'en';
     if (currentLang === 'fr') {{
