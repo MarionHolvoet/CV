@@ -18,6 +18,7 @@ Single-file bilingual CV (English / French) generated from a LaTeX source.
 | `tex_watch.py` | Converts the TeX source to `index.html` automatically on save |
 | `index.html` | Generated HTML — do not edit by hand |
 | `main.go` | Minimal Go web server for self-hosted deployment |
+| `scripts/pre-push` | Git pre-push hook — auto-regenerates `index.html` before every push |
 | `resources/photo.jpg` | Profile photo |
 
 ---
@@ -39,6 +40,26 @@ Requires Python 3.9+ and `watchdog`:
 ```bash
 pip install watchdog
 ```
+
+---
+
+## Git hooks
+
+A `pre-push` hook is provided in `scripts/` that automatically runs `tex_watch.py --once`
+and commits the updated `index.html` before every push.
+
+**Install (Linux / macOS / Git Bash on Windows):**
+```bash
+cp scripts/pre-push .git/hooks/pre-push
+chmod +x .git/hooks/pre-push
+```
+
+**Install (PowerShell on Windows):**
+```powershell
+Copy-Item scripts/pre-push .git/hooks/pre-push
+```
+
+Git for Windows runs hooks via its bundled `sh.exe`, so no `chmod` is needed on Windows.
 
 ---
 

@@ -1,0 +1,26 @@
+#!/bin/sh
+# pre-push hook: regenerate index.html from CV_Marion_Holvoet.tex before every push
+#
+# Install:
+#   cp scripts/pre-push .git/hooks/pre-push
+#   chmod +x .git/hooks/pre-push   # (Linux/macOS only)
+
+REPO_DIR="$(git rev-parse --show-toplevel)"
+cd "$REPO_DIR" || exit 1
+
+echo "[pre-push] Regenerating index.html from TeX source..."
+python3.11 tex_watch.py --once
+if [ $? -ne 0 ]; then
+  echo "[pre-push] ERROR: tex_watch.py failed. Push aborted."
+  exit 1
+fi
+
+# Stage index.html if it was modified by the regeneration
+if ! git diff --quiet index.html; then
+  echo "[pre-push] index.html updated — staging it..."
+  git add index.html
+  git commit -m "chore: regenerate index.html before push"
+fi
+
+echo "[pre-push] Done."
+exit 0
