@@ -19,7 +19,10 @@ Single-file bilingual CV (English / French) generated from a LaTeX source.
 | `index.html` | Generated HTML — do not edit by hand |
 | `main.go` | Minimal Go web server for self-hosted deployment |
 | `scripts/pre-push` | Git pre-push hook — auto-translates and regenerates `index.html` before every push |
-| `scripts/auto_translate.py` | DeepL-powered translator — syncs FR translations in `tex_watch.py` |
+| `scripts/auto_translate.py` | Google Translate integration — syncs FR translations into `tex_watch.py` |
+| `scripts/run_server.sh` | Restart loop for self-hosted deployment (pull → build → run) |
+| `.translation_cache.json` | SHA-256-keyed cache of EN→FR translations (avoids redundant API calls) |
+| `go.mod` | Go module file — required for `go build` |
 | `resources/photo.jpg` | Profile photo |
 
 ---
@@ -84,6 +87,12 @@ pip install deep-translator
 
 The pre-push hook runs translation automatically on every push.
 
+Translation results are persisted in `.translation_cache.json` (keyed by SHA-256 of the source string) so unchanged bullets are never re-sent to the API.
+
+**Protected terms** — `GLOSSARY_TERMS` in `scripts/auto_translate.py` lists tokens (e.g. `GitLab`, `CI/CD`, `C++`) that are substituted out before translation and restored afterwards, preventing mistranslation of proper nouns and acronyms.
+
+**Feminine grammar** — `FEMININE_CORRECTIONS` in `scripts/auto_translate.py` is a list of regex replacements applied after every translation to correct masculine-defaulting adjectives and nouns (e.g. `administrateur → administratrice`, `GitLab administratrice → Administratrice GitLab`).
+
 ---
 
 ## GitHub Pages deployment
@@ -139,10 +148,4 @@ go build -buildvcs=false -o main main.go
 
 Set the `GITHUB_WEBHOOK_SECRET` environment variable to validate webhook calls.
 
----
 
-## PDF download
-
-The CV includes a **PDF** button in the top-right corner that triggers the browser
-print dialog. Select *Save as PDF* to download. Colors, margins, and layout are
-optimised for print and match the LaTeX PDF output.
