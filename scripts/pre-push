@@ -1,5 +1,6 @@
 #!/bin/sh
-# pre-push hook: regenerate index.html from CV_Marion_Holvoet.tex before every push
+# pre-push hook: auto-translate missing FR entries via Google Translate (free, no API key),
+# then regenerate index.html from CV_Marion_Holvoet.tex before every push.
 #
 # Install:
 #   cp scripts/pre-push .git/hooks/pre-push
@@ -8,6 +9,13 @@
 REPO_DIR="$(git rev-parse --show-toplevel)"
 cd "$REPO_DIR" || exit 1
 
+# Auto-translate missing/changed EN→FR entries (uses Google Translate, no key required)
+echo "[pre-push] Running auto-translation (Google Translate)..."
+python3.11 tex_watch.py --translate
+if [ $? -ne 0 ]; then
+  echo "[pre-push] WARNING: translation step failed — continuing with existing FR strings."
+fi
+
 echo "[pre-push] Regenerating index.html from TeX source..."
 python3.11 tex_watch.py --once
 if [ $? -ne 0 ]; then
@@ -15,11 +23,18 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Stage index.html if it was modified by the regeneration
-if ! git diff --quiet index.html; then
-  echo "[pre-push] index.html updated — staging it..."
-  git add index.html
-  git commit -m "chore: regenerate index.html before push"
+# Stage any updated files
+CHANGED=""
+for f in index.html tex_watch.py .translation_cache.json; do
+  if ! git diff --quiet "$f" 2>/dev/null; then
+    CHANGED="$CHANGED $f"
+  fi
+done
+
+if [ -n "$CHANGED" ]; then
+  echo "[pre-push] Staging updated files:$CHANGED"
+  git add $CHANGED
+  git commit -m "chore: auto-translate and regenerate before push"
 fi
 
 echo "[pre-push] Done."

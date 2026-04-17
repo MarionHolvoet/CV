@@ -4,9 +4,13 @@ tex_watch.py  —  Watch CV_Marion_Holvoet.tex and regenerate index.html on ever
 Usage:
     python tex_watch.py            # watch and regenerate on change
     python tex_watch.py --once     # regenerate once and exit
+    python tex_watch.py --translate        # auto-translate missing FR entries, then regenerate
+    python tex_watch.py --translate-force  # retranslate everything, then regenerate
 
 Requires: watchdog
     pip install watchdog
+For translation (free, no API key required):
+    pip install deep-translator
 """
 
 import re
@@ -320,7 +324,7 @@ FR = {
     "English": "Anglais",  "French": "Français",  "German": "Allemand",
     "Native":  "Natif",
     # cert sidebar
-    "cert_sub_fr": "Professionnel Certifié<br/>en Architecture Logicielle<br/>Niveau Fondation",
+    "cert_sub_fr": "Professionnelle Certifiée<br/>en Architecture Logicielle<br/>Niveau Fondation",
     "cert_date_fr": "Délivré : Septembre 2024",
     # skills / traits (order-matched to EN list)
     "skills_fr": [
@@ -336,20 +340,20 @@ FR = {
         "GitHub Copilot",
     ],
     "traits_fr": [
-        "Pensée positive",
-        "Orientée solutions",
-        "Autonome et travailleuse",
-        "Communicante claire",
-        "Apprenante rapide",
+        "Penseuse positive",
+        "Esprit orienté solutions",
+        "Indépendante et travailleuse",
+        "Communicatrice claire",
+        "Apprentissage rapide",
         "Axée sur la qualité",
-        "Esprit d'équipe",
+        "Esprit d'équipe collaboratif",
     ],
     # right column: experience titles (EN → FR)
     "exp_titles": {
         "Software Engineer":          "Ingénieure Logiciel",
         "Research Engineer":          "Ingénieure de Recherche",
         "Software Engineering Intern":"Stagiaire Ingénierie Logiciel",
-        "Research Intern":            "Stagiaire Chercheur",
+        "Research Intern":            "Stagiaire Chercheuse",
     },
     # experience company locations
     "Switzerland": "Suisse",
@@ -372,24 +376,24 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture &amp; Conception Système :</b> Participation aux discussions d'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, la scalabilité et la maintenabilité à long terme.",
-            "<b>Développement Embarqué &amp; Backend :</b> Composants firmware et backend en C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
-            "<b>Systèmes Multi-Plateformes :</b> Extension d'une application C++/Qt. Gestion des builds multi-plateformes sous Linux / Windows / MacOS sur ARM et x86.",
-            "<b>Outils &amp; Pratiques :</b> Gestion de versions avec Git et Perforce. Contribution à la migration de Perforce vers Git et accompagnement de la transition des workflows. Environnements de développement Linux avec des systèmes de build basés sur CMake. Initiation de pipelines CI/CD avec des images Docker personnalisées.",
+            "<b>Architecture et amp; Conception du système :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
+            "<b>Intégré et intégré Développement backend :</b> Firmware et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
+            "<b>Systèmes multiplateformes :</b> extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
+            "<b>Outillage et amp; Pratiques :</b> Contrôle de version avec Git et Perforce. Administratrice GitLab. Environnements de développement basés sur Linux avec systèmes de construction basés sur CMake. Lancement de pipelines CI/CD avec des images Docker personnalisées.",
         ],
         "Spacetek Technology AG": [
-            "Développement logiciel embarqué en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
-            "Développement d'API RESTful en Go via HTTPS. Gestion de lac de données avec HDF5.",
-            "Traitement du signal en temps réel en Python et C++ pour signaux bruités. Développement de SDK.",
+            "Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
+            "Développement d'API RESTful dans Go sur HTTPS. Gestion des lacs de données avec HDF5.",
+            "Traitement du signal en temps réel dans Python et C++ pour les signaux bruités. Développement SDK.",
             "Développement front-end avec Qt (C++) et Svelte (JavaScript).",
-            "Tests avec GoogleTest et Pytest. Pipelines CI/CD GitLab.",
+            "Test avec GoogleTest et Pytest. Pipelines GitLab CI/CD. Ajout de plus d'écriture juste pour vérifier la traduction automatique.",
         ],
-        "Ottobock_1": [  # Sept 2020 – March 2021
+        "Ottobock_1": [
             "Contrôle moteur en boucle fermée pour prothèses haut de gamme en C++, Python et Node.js.",
-            "Acquisition de données réseau de capteurs (température, pression, courant via Modbus et I<sup>2</sup>C) avec analyse par apprentissage automatique.",
+            "Acquisition de données sur un réseau de capteurs (température, pression, courant via Modbus et I<sup>2</sup>C) avec analyse basée sur le machine learning.",
         ],
-        "Ottobock_2": [  # Feb – Aug 2020
-            "Interface graphique Python pour une imprimante 3D grand format : calibration de l'extrusion, surveillance des capteurs de pression et contrôle des moteurs pas à pas via Bluetooth vers un microcontrôleur ARM\u202fM4 (C++).",
+        "Ottobock_2": [
+            "Interface graphique Python pour une imprimante 3D à grande échelle : calibrage de l'extrusion, surveillance du capteur de pression et contrôle du moteur pas à pas via Bluetooth vers un microcontrôleur ARMM4 (C++).",
         ],
         "INRIA": [
             "Application smartwatch portable (Tizen) pour l'acquisition de données. Quantification et analyse des tremblements liés à la maladie de Parkinson.",
@@ -419,7 +423,7 @@ FR = {
     "Professional Experience": "Expérience Professionnelle",
     "Education":               "Formation",
     # cert right column
-    "cert_right_title_fr": "iSAQB® Professionnel Certifié en Architecture Logicielle",
+    "cert_right_title_fr": "iSAQB® Professionnelle Certifiée en Architecture Logicielle",
     "cert_right_sub_fr":   "Niveau Fondation (CPSA-F)",
     "cert_right_date_fr":  "Septembre 2024",
     "cert_bullets_fr": [
@@ -1339,7 +1343,7 @@ def render_html(data: dict) -> str:
 </div><!-- .page -->
 
   <div id="inapp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#12343B;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9pt;padding:12px 16px;z-index:9999;align-items:center;justify-content:space-between;gap:12px;">
-    <span>To save as PDF, open this page in Safari or Chrome &#x2197;</span>
+    <span>To save as PDF, <a id="inapp-open-link" href="#" target="_blank" rel="noopener" style="color:var(--accentlight,#7DC8C2);text-decoration:underline;">open in browser &#x2197;</a></span>
     <button onclick="document.getElementById('inapp-banner').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:9pt;white-space:nowrap;">Got it</button>
   </div>
 
@@ -1350,6 +1354,7 @@ def render_html(data: dict) -> str:
     const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
     if (inApp) {{
       const banner = document.getElementById('inapp-banner');
+      document.getElementById('inapp-open-link').href = window.location.href;
       banner.style.display = 'flex';
     }} else {{
       window.print();
@@ -1373,8 +1378,15 @@ def render_html(data: dict) -> str:
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
 
-def regenerate():
+def regenerate(translate: bool = False, force: bool = False):
     try:
+        if translate:
+            from scripts.auto_translate import run as translate_run
+            updates = translate_run(force=force)
+            # Update the in-memory FR dict so render_html uses fresh translations
+            FR["skills_fr"]    = updates["skills_fr"]
+            FR["traits_fr"]    = updates["traits_fr"]
+            FR["exp_items_fr"] = updates["exp_items_fr"]
         data = parse_tex(TEX_FILE)
         html = render_html(data)
         HTML_FILE.write_text(html, encoding="utf-8")
@@ -1384,8 +1396,13 @@ def regenerate():
         import traceback; traceback.print_exc()
 
 if __name__ == "__main__":
+    if "--translate" in sys.argv or "--translate-force" in sys.argv:
+        force = "--translate-force" in sys.argv
+        regenerate(translate=True, force=force)
+        sys.exit(0)
+
     if "--once" in sys.argv:
-        regenerate()
+        regenerate(translate=True)
         sys.exit(0)
 
     try:
@@ -1403,10 +1420,10 @@ if __name__ == "__main__":
                 now = time.time()
                 if now - self._last > 1:   # debounce 1 s
                     self._last = now
-                    regenerate()
+                    regenerate(translate=True)
 
     print(f"Watching {TEX_FILE.name} — press Ctrl+C to stop.")
-    regenerate()   # run once on start
+    regenerate(translate=True)   # run once on start
 
     observer = Observer()
     observer.schedule(TexHandler(), str(TEX_FILE.parent), recursive=False)

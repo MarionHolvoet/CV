@@ -18,7 +18,8 @@ Single-file bilingual CV (English / French) generated from a LaTeX source.
 | `tex_watch.py` | Converts the TeX source to `index.html` automatically on save |
 | `index.html` | Generated HTML — do not edit by hand |
 | `main.go` | Minimal Go web server for self-hosted deployment |
-| `scripts/pre-push` | Git pre-push hook — auto-regenerates `index.html` before every push |
+| `scripts/pre-push` | Git pre-push hook — auto-translates and regenerates `index.html` before every push |
+| `scripts/auto_translate.py` | DeepL-powered translator — syncs FR translations in `tex_watch.py` |
 | `resources/photo.jpg` | Profile photo |
 
 ---
@@ -45,8 +46,10 @@ pip install watchdog
 
 ## Git hooks
 
-A `pre-push` hook is provided in `scripts/` that automatically runs `tex_watch.py --once`
-and commits the updated `index.html` before every push.
+A `pre-push` hook is provided in `scripts/` that automatically:
+1. Runs `auto_translate.py` to sync any new/changed English bullets to French via Google Translate (free, no API key)
+2. Regenerates `index.html` from the TeX source
+3. Commits any updated files before the push
 
 **Install (Linux / macOS / Git Bash on Windows):**
 ```bash
@@ -59,7 +62,27 @@ chmod +x .git/hooks/pre-push
 Copy-Item scripts/pre-push .git/hooks/pre-push
 ```
 
-Git for Windows runs hooks via its bundled `sh.exe`, so no `chmod` is needed on Windows.
+---
+
+## Auto-translation (Google Translate)
+
+French translations are cached in `tex_watch.py`. When you update the LaTeX source,
+run the translator to sync only the new/changed entries:
+
+```bash
+# Translate missing entries only
+python tex_watch.py --translate
+
+# Retranslate everything from scratch
+python tex_watch.py --translate-force
+```
+
+**Setup (free, no account or API key required):**
+```bash
+pip install deep-translator
+```
+
+The pre-push hook runs translation automatically on every push.
 
 ---
 
@@ -83,23 +106,35 @@ GitHub Pages will automatically redeploy at `https://marionholvoet.github.io/CV/
 
 ---
 
+## PDF download / LinkedIn in-app browser
+
+The **PDF** button calls `window.print()` to trigger the browser's save-to-PDF dialog.
+
+LinkedIn (and some other apps) open links in a built-in WebView that blocks `window.print()`. In that case a banner appears at the bottom of the page:
+
+> *"To save as PDF, **open in browser ↗**"*
+
+Tapping the link opens the page URL in the system browser (Safari / Chrome), from where the user can print/save normally. The banner is dismissed with the "Got it" button.
+
+---
+
 ## Self-hosted deployment (Go server)
 
 The Go server exposes the CV at `/marion` and handles a GitHub webhook at `/exit`
-for graceful remote restarts.
+for graceful remote restarts. When the webhook fires, the server exits; `run_server.sh`
+then pulls the latest code, rebuilds, and restarts automatically.
 
-Linux:
+**First-time setup on the server:**
 ```bash
 cd src/resources
-go build -o main main.go
-./main          # starts on :12345
+export GITHUB_WEBHOOK_SECRET=your_secret
+nohup bash scripts/run_server.sh > server.log 2>&1 &
 ```
 
-Windows:
+**Manual one-shot build (no auto-restart):**
 ```bash
-cd src/resources
-go build -o main main.go
-main.exe   # starts on :12345
+go build -buildvcs=false -o main main.go
+./main   # starts on :12345
 ```
 
 Set the `GITHUB_WEBHOOK_SECRET` environment variable to validate webhook calls.
