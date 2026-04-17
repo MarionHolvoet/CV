@@ -71,6 +71,7 @@ FEMININE_CORRECTIONS = [
     # nouns
     (r"\bstagiaire chercheur\b", "stagiaire chercheuse"),
     (r"\badministrateur\b",      "administratrice"),
+    (r"\bDéfenseur\b",           "Défenseure"),
     # word-order fixes (must come after gender corrections above)
     (r"GitLab\s+administratrice\b", "Administratrice GitLab"),
 ]
@@ -79,7 +80,29 @@ def _apply_feminine(text: str) -> str:
     """Apply feminine grammar corrections to a translated French string."""
     import re as _re
     for pattern, replacement in FEMININE_CORRECTIONS:
-        text = _re.sub(pattern, replacement, text, flags=_re.IGNORECASE)
+        def _make_repl(repl):
+            def _repl(m):
+                # Preserve leading capitalisation of the matched token
+                return repl[0].upper() + repl[1:] if m.group(0)[0].isupper() else repl
+            return _repl
+        text = _re.sub(pattern, _make_repl(replacement), text, flags=_re.IGNORECASE)
+    return text
+
+def _fix_capitalization(text: str) -> str:
+    """Capitalize first letter after bold closing tags and sentence boundaries."""
+    import re as _re
+    # After </b> + whitespace (incl. \xa0 inserted by Google for French punctuation)
+    text = _re.sub(
+        r'(</b>[\xa0\s]+)([a-z\u00e0-\u00ff])',
+        lambda m: m.group(1) + m.group(2).upper(),
+        text,
+    )
+    # After ". ": capitalize first letter of next sentence
+    text = _re.sub(
+        r'(\.\s+)([a-z\u00e0-\u00ff])',
+        lambda m: m.group(1) + m.group(2).upper(),
+        text,
+    )
     return text
 
 def translate_text(text: str, cache: dict, force: bool = False) -> str:
@@ -94,8 +117,18 @@ def translate_text(text: str, cache: dict, force: bool = False) -> str:
     if not force and key in cache:
         return cache[key]
 
-    # Protect known tech terms with placeholders so Google Translate leaves them alone
+    # Protect HTML entities (e.g. &amp;) so the translator cannot mangle them
+    entity_map = {}
     protected = text
+    for m in re.finditer(r'&[a-z]+;', text):
+        entity = m.group(0)
+        if entity not in entity_map.values():
+            ph = f"ENT{len(entity_map):02d}"
+            entity_map[ph] = entity
+    for ph, entity in entity_map.items():
+        protected = protected.replace(entity, ph)
+
+    # Protect known tech terms with placeholders so Google Translate leaves them alone
     placeholders = {}
     for term in sorted(GLOSSARY_TERMS, key=len, reverse=True):
         if term in protected:
@@ -105,12 +138,23 @@ def translate_text(text: str, cache: dict, force: bool = False) -> str:
 
     translated = GoogleTranslator(source="en", target="fr").translate(protected)
 
-    # Restore placeholders
+    # Restore tech-term placeholders
     for ph, term in placeholders.items():
         translated = translated.replace(ph, term)
 
+    # Restore HTML entities
+    for ph, entity in entity_map.items():
+        translated = translated.replace(ph, entity)
+
+    # Fix "et amp;" mangling introduced by some translator versions
+    import re as _re2
+    translated = _re2.sub(r'\bet amp;(\s)', r'&amp;\1', translated)
+
     # Apply feminine grammar corrections
     translated = _apply_feminine(translated)
+
+    # Fix sentence-start capitalisation lost during translation
+    translated = _fix_capitalization(translated)
 
     cache[key] = translated
     return translated

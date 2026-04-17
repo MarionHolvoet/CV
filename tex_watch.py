@@ -376,10 +376,10 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture et amp; Conception du système :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
+            "<b>Architecture &amp; Conception du système :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
             "<b>Intégré et intégré Développement backend :</b> Firmware et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
-            "<b>Systèmes multiplateformes :</b> extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
-            "<b>Outillage et amp; Pratiques :</b> Contrôle de version avec Git et Perforce. Administratrice GitLab. Environnements de développement basés sur Linux avec systèmes de construction basés sur CMake. Lancement de pipelines CI/CD avec des images Docker personnalisées.",
+            "<b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
+            "<b>Outillage &amp; Pratiques :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
         ],
         "Spacetek Technology AG": [
             "Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
