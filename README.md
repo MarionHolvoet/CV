@@ -21,7 +21,6 @@ Single-file bilingual CV (English / French) generated from a LaTeX source.
 | `scripts/pre-push` | Git pre-push hook — auto-translates and regenerates `index.html` before every push |
 | `scripts/auto_translate.py` | Google Translate integration — syncs FR translations into `tex_watch.py` |
 | `scripts/run_server.sh` | Restart loop for self-hosted deployment (pull → build → run) |
-| `.translation_cache.json` | SHA-256-keyed cache of EN→FR translations (avoids redundant API calls) |
 | `go.mod` | Go module file — required for `go build` |
 | `resources/photo.jpg` | Profile photo |
 
@@ -69,29 +68,29 @@ Copy-Item scripts/pre-push .git/hooks/pre-push
 
 ## Auto-translation (Google Translate)
 
-French translations are cached in `tex_watch.py`. When you update the LaTeX source,
-run the translator to sync only the new/changed entries:
+French translations are stored directly in `tex_watch.py` and kept in sync automatically. Every time you save the TeX file (watch mode), run `--once`, or push, the translator checks each English bullet against the current FR strings in `tex_watch.py` and retranslates any that are new or changed.
+
+Translation is powered by **Google Translate** via the `deep-translator` Python library — free, no account or API key required:
 
 ```bash
-# Translate missing entries only
+pip install deep-translator
+```
+
+You can also trigger it manually:
+
+```bash
+# Translate missing/changed entries only
 python tex_watch.py --translate
 
 # Retranslate everything from scratch
 python tex_watch.py --translate-force
 ```
 
-**Setup (free, no account or API key required):**
-```bash
-pip install deep-translator
-```
-
-The pre-push hook runs translation automatically on every push.
-
-Translation results are persisted in `.translation_cache.json` (keyed by SHA-256 of the source string) so unchanged bullets are never re-sent to the API.
+A local cache (`.translation_cache.json`, gitignored) speeds up repeated runs by skipping strings that haven't changed.
 
 **Protected terms** — `GLOSSARY_TERMS` in `scripts/auto_translate.py` lists tokens (e.g. `GitLab`, `CI/CD`, `C++`) that are substituted out before translation and restored afterwards, preventing mistranslation of proper nouns and acronyms.
 
-**Feminine grammar** — `FEMININE_CORRECTIONS` in `scripts/auto_translate.py` is a list of regex replacements applied after every translation to correct masculine-defaulting adjectives and nouns (e.g. `administrateur → administratrice`, `GitLab administratrice → Administratrice GitLab`).
+**Feminine grammar** — `FEMININE_CORRECTIONS` in `scripts/auto_translate.py` is a list of regex replacements applied after every translation to correct masculine-defaulting adjectives and nouns (e.g. `administrateur → administratrice`).
 
 ---
 

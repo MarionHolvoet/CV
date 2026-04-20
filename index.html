@@ -872,7 +872,7 @@
 </div><!-- .page -->
 
   <div id="inapp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#12343B;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9pt;padding:12px 16px;z-index:9999;align-items:center;justify-content:space-between;gap:12px;">
-    <span>To save as PDF, <a id="inapp-open-link" href="#" target="_blank" rel="noopener" style="color:var(--accentlight,#7DC8C2);text-decoration:underline;">open in browser &#x2197;</a></span>
+    <span>To save as PDF, open this page in your browser &#x2197;</span>
     <button onclick="document.getElementById('inapp-banner').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:9pt;white-space:nowrap;">Got it</button>
   </div>
 
@@ -883,7 +883,6 @@
     const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
     if (inApp) {
       const banner = document.getElementById('inapp-banner');
-      document.getElementById('inapp-open-link').href = window.location.href;
       banner.style.display = 'flex';
     } else {
       window.print();
