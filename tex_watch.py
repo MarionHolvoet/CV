@@ -13,8 +13,14 @@ For translation (free, no API key required):
     pip install deep-translator
 """
 
+
 import re
 import sys
+if hasattr(sys.stdout, 'reconfigure'):
+  try:
+    sys.stdout.reconfigure(encoding='utf-8')
+  except Exception:
+    pass
 import time
 import textwrap
 from pathlib import Path
@@ -329,8 +335,8 @@ FR = {
     # skills / traits (order-matched to EN list)
     "skills_fr": [
         "C++ / Go / Python / JavaScript",
-        "Architecture Logicielle",
-        "Conception Système",
+        "Architecture logicielle",
+        "Conception du système",
         "Embedded Linux / ARM / x86",
         "CMake / Git / Docker",
         "Yocto / Mender",
@@ -341,12 +347,12 @@ FR = {
     ],
     "traits_fr": [
         "Penseuse positive",
-        "Esprit orienté solutions",
+        "Esprit orientée solutions",
         "Indépendante et travailleuse",
         "Communicatrice claire",
         "Apprentissage rapide",
         "Axée sur la qualité",
-        "Esprit d'équipe collaboratif",
+        "Esprit d'équipe collaborative",
     ],
     # right column: experience titles (EN → FR)
     "exp_titles": {
@@ -376,17 +382,17 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture &amp; Conception du système :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
-            "<b>Intégré et intégré Développement backend :</b> Firmware et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
+            "<b>Architecture &amp; Conception de systèmes :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
+            "<b>Développement backend &amp; intégré :</b> Micrologiciel et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.",
             "<b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
-            "<b>Outillage &amp; Pratiques :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
+            "<b>Pratiques d'outillage &amp; :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
         ],
         "Spacetek Technology AG": [
             "Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
             "Développement d'API RESTful dans Go sur HTTPS. Gestion des lacs de données avec HDF5.",
             "Traitement du signal en temps réel dans Python et C++ pour les signaux bruités. Développement SDK.",
             "Développement front-end avec Qt (C++) et Svelte (JavaScript).",
-            "Test avec GoogleTest et Pytest. Pipelines GitLab CI/CD. Ajout de plus d'écriture juste pour vérifier la traduction automatique.",
+            "Test avec GoogleTest et Pytest. Canalisations GitLab CI/CD.",
         ],
         "Ottobock_1": [
             "Contrôle moteur en boucle fermée pour prothèses haut de gamme en C++, Python et Node.js.",

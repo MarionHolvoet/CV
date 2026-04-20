@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,15 +26,11 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install watchdog deep-translator
+          pip install watchdog deep-translator coverage
 
-      - name: Run Python tests
+      - name: Install Go coverage tool
         run: |
-          python -m unittest discover -s tests || echo 'No Python tests found.'
-
-      - name: Run Go tests
-        run: |
-          if ls *.go 1> /dev/null 2>&1; then go test ./... || echo 'No Go tests found.'; fi
+          go install github.com/mattn/goveralls@latest
 
       - name: Generate index.html
         run: |
@@ -50,8 +46,59 @@ jobs:
           name: index-html
           path: index.html
 
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install coverage watchdog deep-translator
+
+      - name: Install requests and pytest for static file test
+        run: |
+          python -m pip install requests pytest
+
+      - name: Run all Python tests (including CLI, edge, render, auto_translate, static)
+        run: |
+          coverage run -m pytest tests || echo 'No Python tests found.'
+          coverage report
+          coverage xml
+        continue-on-error: true
+
+      - name: Upload Python coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-coverage-xml
+          path: coverage.xml
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.6'
+
+      - name: Run Go tests with coverage
+        run: |
+          if ls *.go 1> /dev/null 2>&1; then go test -coverprofile=coverage.out ./... || echo 'No Go tests found.'; fi
+          go tool cover -func=coverage.out
+        continue-on-error: true
+
+      - name: Upload Go coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: go-coverage-out
+          path: coverage.out
+
   deploy:
-    needs: build-and-test
+    needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:

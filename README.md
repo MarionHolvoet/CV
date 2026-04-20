@@ -147,4 +147,28 @@ go build -buildvcs=false -o main main.go
 
 Set the `GITHUB_WEBHOOK_SECRET` environment variable to validate webhook calls.
 
+---
+
+## Automated Tests
+
+The `tests/` directory contains Python and Go tests covering:
+- **Core logic:** TeX parsing, HTML rendering, translation cache, and CLI entry points
+- **Edge cases:** Invalid/malformed TeX, empty sections, error handling
+- **Static file serving:** Ensures the Go server serves files (e.g. profile photo)
+- **Go server:** HTTP handler, signature validation, and webhook logic
+
+Tests are run automatically in CI (see `.github/workflows/ci.yml`).
+
+**Run all Python tests locally:**
+```bash
+pip install pytest requests coverage
+coverage run -m pytest tests
+coverage report
+```
+
+**Run Go tests locally:**
+```bash
+go test ./...
+```
+
 
