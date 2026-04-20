@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Marion Holvoet — CV</title>
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #1C2B2B;
+      background: #fff;
+    }
+
+    /* ── Colour palette ────────────────────────────────────────────── */
+    :root {
+      --headerbg:   #12343B;
+      --accent:     #0F7F74;
+      --accentlight:#7DC8C2;
+      --sidebarbg:  #EAF4F3;
+      --dark:       #1C2B2B;
+      --muted:      #4A6E6A;
+    }
+
+    /* ── Page wrapper (A4-ish) ─────────────────────────────────────── */
+    .page {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════════════════════════════ */
+    .header {
+      background: var(--headerbg);
+      padding: 22px 28px 0 28px;
+      position: relative;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 18px;
+    }
+
+    .header-photo {
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2.5px solid var(--accent);
+      object-fit: cover;
+      background: var(--accent);
+    }
+
+    .header-photo-placeholder {
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2.5px solid var(--accent);
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .header-text h1 {
+      font-size: 26pt;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .header-rule {
+      height: 1px;
+      width: 140px;
+      background: var(--accentlight);
+      margin: 6px 0;
+    }
+
+    .header-text .subtitle {
+      font-size: 13pt;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .header-accent-strip {
+      height: 5px;
+      background: var(--accent);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       BODY — two columns
+    ══════════════════════════════════════════════════════════════ */
+    .body {
+      display: flex;
+      align-items: stretch;
+    }
+
+    /* ── Left column (33%) ─────────────────────────────────────────── */
+    .left-col {
+      width: 33%;
+      flex-shrink: 0;
+      background: var(--sidebarbg);
+      padding: 18px 16px 24px 18px;
+    }
+
+    /* ── Right column (67%) ────────────────────────────────────────── */
+    .right-col {
+      flex: 1;
+      padding: 18px 24px 24px 20px;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SECTION HEADINGS
+    ══════════════════════════════════════════════════════════════ */
+
+    .lsection {
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    .lsection:first-child { margin-top: 4px; }
+
+    .lsection-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .lsection-rule {
+      height: 0.5px;
+      background: var(--accentlight);
+    }
+
+    .rsection {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    .rsection:first-child { margin-top: 4px; }
+
+    .rsection-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+
+    .rsection-bar {
+      width: 4px;
+      height: 1.2em;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .rsection-title {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .rsection-rule {
+      height: 0.7px;
+      background: var(--accentlight);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       LEFT COLUMN CONTENT
+    ══════════════════════════════════════════════════════════════ */
+    .profile-text {
+      font-size: 8.5pt;
+      color: var(--dark);
+      margin-top: 5px;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .contact-list li {
+      font-size: 8.5pt;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .contact-list a {
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .contact-list a:hover { text-decoration: underline; }
+
+    .contact-icon {
+      color: var(--accent);
+      font-size: 9pt;
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .lang-list {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .lang-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5pt;
+      margin-bottom: 3px;
+    }
+
+    .lang-name { font-weight: 700; color: var(--dark); }
+    .lang-level { color: var(--muted); }
+
+    .cert-sidebar {
+      margin-top: 5px;
+      font-size: 8.5pt;
+    }
+
+    .cert-sidebar .cert-title {
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .cert-sidebar .cert-sub {
+      color: var(--muted);
+    }
+
+    .cert-sidebar .cert-date {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .skill-list {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .skill-list li {
+      font-size: 8.5pt;
+      color: var(--dark);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .skill-bullet {
+      color: var(--accent);
+      font-size: 7pt;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       RIGHT COLUMN CONTENT
+    ══════════════════════════════════════════════════════════════ */
+
+    .exp-entry {
+      margin-bottom: 14px;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 10pt;
+    }
+
+    .exp-dates {
+      font-size: 8.5pt;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .exp-company {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .exp-desc {
+      list-style: disc;
+      padding-left: 1.4em;
+      margin-top: 4px;
+    }
+
+    .exp-desc li {
+      font-size: 8.5pt;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .edu-entry {
+      margin-bottom: 14px;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .edu-degree {
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 10pt;
+    }
+
+    .edu-year {
+      font-size: 8.5pt;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .edu-institution {
+      font-size: 8.5pt;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .edu-desc {
+      font-size: 8.5pt;
+      color: var(--dark);
+    }
+
+    .cert-right-entry {
+      margin-bottom: 14px;
+    }
+
+    .cert-right-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .cert-right-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 10pt;
+    }
+
+    .cert-right-date {
+      font-size: 8.5pt;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .cert-right-sub {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .cert-right-desc {
+      list-style: disc;
+      padding-left: 1.4em;
+      margin-top: 4px;
+    }
+
+    .cert-right-desc li {
+      font-size: 8.5pt;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .small-text {
+      font-size: 8.5pt;
+      color: var(--dark);
+    }
+
+    .small-text b { color: var(--dark); }
+
+    /* ── Language toggle ───────────────────────────────────────────── */
+    .lang-toggle {
+      position: absolute;
+      top: 14px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+    }
+    #lang-btn, #pdf-btn {
+      background: transparent;
+      border: 1.5px solid var(--accentlight);
+      color: var(--accentlight);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      font-family: inherit;
+    }
+    #lang-btn:hover, #pdf-btn:hover { background: rgba(125,200,194,0.18); }
+    .lang-fr { display: none; }
+
+    /* ── Company / school links ─────────────────────────────────────── */
+    .exp-company a, .edu-institution a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--muted);
+    }
+    .exp-company a:hover, .edu-institution a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Print styles ───────────────────────────────────────────────── */
+    @page { margin: 1.5cm 1.8cm 1.5cm 1.2cm; }
+    @media print {
+      body { background: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { box-shadow: none; max-width: 100%; }
+      .lang-toggle { display: none; }
+      a, a:visited {
+        color: inherit !important;
+        text-decoration: none !important;
+        border-bottom: none !important;
+        pointer-events: none;
+      }
+      a::after { content: none !important; }
+      .exp-entry, .edu-entry, .cert-right-entry, .cert-sidebar,
+      .rsection, .lsection {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .rsection, .lsection {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════ HEADER ════════════════════════════ -->
+  <header class="header">
+    <div class="lang-toggle">
+      <button id="pdf-btn" onclick="downloadPDF()">
+        <span class="lang-en">PDF</span><span class="lang-fr">PDF</span>
+      </button>
+      <button id="lang-btn" onclick="toggleLang()">FR</button>
+    </div>
+    <div class="header-inner">
+      <img class="header-photo" src="resources/photo.jpg" alt="Marion Holvoet"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <div class="header-photo-placeholder" style="display:none;"></div>
+      <div class="header-text">
+        <h1>Marion Holvoet</h1>
+        <div class="header-rule"></div>
+        <span class="subtitle">
+          <span class="lang-en">Software Engineer &nbsp;|&nbsp; Architecture &amp; MedTech Systems</span>
+          <span class="lang-fr">Ingénieure Logiciel &nbsp;|&nbsp; Architecture &amp; Systèmes MedTech</span>
+        </span>
+      </div>
+    </div>
+  </header>
+  <div class="header-accent-strip"></div>
+
+  <!-- ═══════════════════════ BODY ══════════════════════════════ -->
+  <div class="body">
+
+    <!-- ─────────────────── LEFT COLUMN ─────────────────────── -->
+    <aside class="left-col">
+
+      <!-- Profile -->
+      <div class="lsection">
+        <span class="lsection-title"><span class="lang-en">Profile</span><span class="lang-fr">Profil</span></span>
+        <div class="lsection-rule"></div>
+      </div>
+      <p class="profile-text">
+        <span class="lang-en">Software Engineer specialized in embedded and backend systems, with a Master's degree in Medical Device Engineering and iSAQB CPSA-F certification. Focused on software architecture, system design, and safety-conscious development in quality-critical environments.</span>
+        <span class="lang-fr">Ingénieure logiciel spécialisée dans les systèmes embarqués et backend, avec un Master en Ingénierie des Dispositifs Médicaux et la certification iSAQB&nbsp;CPSA-F. Axée sur l'architecture logicielle, la conception système et le développement rigoureux dans des environnements à exigences qualité élevées.<br/><br/></span>
+      </p>
+
+      <!-- Contact -->
+      <div class="lsection">
+        <span class="lsection-title">Contact</span>
+        <div class="lsection-rule"></div>
+      </div>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-icon">&#9990;</span>
+          +33 (0)6 09 02 33 50
+        </li>
+        <li>
+          <span class="contact-icon">&#9993;</span>
+          <a href="mailto:holvoet.marion@gmail.com">holvoet.marion@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact-icon">in</span>
+          <a href="https://linkedin.com/in/marion-holvoet-713724140" target="_blank" rel="noopener">linkedin/marionholvoet</a>
+        </li>
+      </ul>
+
+      <!-- Languages -->
+      <div class="lsection">
+        <span class="lsection-title"><span class="lang-en">Languages</span><span class="lang-fr">Langues</span></span>
+        <div class="lsection-rule"></div>
+      </div>
+      <ul class="lang-list">
+        <li>
+          <span class="lang-name"><span class="lang-en">English</span><span class="lang-fr">Anglais</span></span>
+          <span class="lang-level"><span class="lang-en">Native</span><span class="lang-fr">Natif</span></span>
+        </li>
+        <li>
+          <span class="lang-name"><span class="lang-en">French</span><span class="lang-fr">Français</span></span>
+          <span class="lang-level"><span class="lang-en">Native</span><span class="lang-fr">Natif</span></span>
+        </li>
+        <li>
+          <span class="lang-name"><span class="lang-en">German</span><span class="lang-fr">Allemand</span></span>
+          <span class="lang-level">A2</span>
+        </li>
+      </ul>
+
+      <!-- Certifications -->
+      <div class="lsection">
+        <span class="lsection-title">Certifications</span>
+        <div class="lsection-rule"></div>
+      </div>
+      <div class="cert-sidebar">
+        <div class="cert-title"><a href="https://certificates.future-network-cert.com/56605bf8-3f87-4795-b6a8-a35f88ad6722#acc.14ITxLiW" target="_blank" rel="noopener">iSAQB®</a></div>
+        <div class="cert-sub">
+          <a href="https://www.isaqb.org/certifications/cpsa-certifications/cpsa-foundation-level/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted);">
+          <span class="lang-en">Certified Professional for<br/>
+          Software Architecture<br/>
+          Foundation Level</span>
+          <span class="lang-fr">Professionnelle Certifiée<br/>en Architecture Logicielle<br/>Niveau Fondation</span>
+          </a>
+        </div>
+        <div class="cert-date" style="margin-top:4px;">
+          <span class="lang-en">Issued: September 2024</span>
+          <span class="lang-fr">Délivré : Septembre 2024</span>
+        </div>
+      </div>
+
+      <!-- Key Skills -->
+      <div class="lsection">
+        <span class="lsection-title"><span class="lang-en">Key Skills</span><span class="lang-fr">Compétences Clés</span></span>
+        <div class="lsection-rule"></div>
+      </div>
+      <ul class="skill-list">
+        <li><span class="skill-bullet">&#9632;</span>C++ / Go / Python / JavaScript</li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Software Architecture</span><span class="lang-fr">Architecture logicielle</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">System Design</span><span class="lang-fr">Conception du système</span></li>
+        <li><span class="skill-bullet">&#9632;</span>Embedded Linux / ARM / x86</li>
+        <li><span class="skill-bullet">&#9632;</span>CMake / Git / Docker</li>
+        <li><span class="skill-bullet">&#9632;</span>Yocto / Mender</li>
+        <li><span class="skill-bullet">&#9632;</span>REST API / HTTPS</li>
+        <li><span class="skill-bullet">&#9632;</span>GoogleTest / Pytest / CI/CD</li>
+        <li><span class="skill-bullet">&#9632;</span>Qt / Svelte / HDF5</li>
+        <li><span class="skill-bullet">&#9632;</span>GitHub Copilot</li>
+      </ul>
+
+      <!-- Personal Traits -->
+      <div class="lsection">
+        <span class="lsection-title"><span class="lang-en">Personal Traits</span><span class="lang-fr">Qualités Personnelles</span></span>
+        <div class="lsection-rule"></div>
+      </div>
+      <ul class="skill-list">
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Positive thinker</span><span class="lang-fr">Penseuse positive</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Solution-oriented mindset</span><span class="lang-fr">Esprit orientée solutions</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Independent and hardworking</span><span class="lang-fr">Indépendante et travailleuse</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Clear communicator</span><span class="lang-fr">Communicatrice claire</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Fast learner</span><span class="lang-fr">Apprentissage rapide</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Quality-focused</span><span class="lang-fr">Axée sur la qualité</span></li>
+        <li><span class="skill-bullet">&#9632;</span><span class="lang-en">Collaborative team player</span><span class="lang-fr">Esprit d'équipe collaborative</span></li>
+      </ul>
+
+    </aside>
+
+    <!-- ─────────────────── RIGHT COLUMN ────────────────────── -->
+    <main class="right-col">
+
+      <!-- Professional Experience -->
+      <div class="rsection">
+        <div class="rsection-head">
+          <span class="rsection-bar"></span>
+          <span class="rsection-title">
+            <span class="lang-en">Professional Experience</span><span class="lang-fr">Expérience Professionnelle</span>
+          </span>
+        </div>
+        <div class="rsection-rule"></div>
+      </div>
+
+      <div class="exp-entry">
+  <div class="exp-header">
+    <span class="exp-title">
+      <span class="lang-en">Software Engineer</span><span class="lang-fr">Ingénieure Logiciel</span>
+    </span>
+    <span class="exp-dates">
+      <span class="lang-en">October 2023 – Present</span><span class="lang-fr">Octobre 2023 – Présent</span>
+    </span>
+  </div>
+  <div class="exp-company"><span class="lang-en"><a href="https://www.metrolab.com" target="_blank" rel="noopener">Metrolab Technology SA</a> | Switzerland</span><span class="lang-fr"><a href="https://www.metrolab.com" target="_blank" rel="noopener">Metrolab Technology SA</a> | Suisse</span></div>
+  <ul class="exp-desc">
+    <li>
+      <span class="lang-en"><b>Architecture &amp; System Design:</b> Contributed to software architecture discussions. Authored an architecture document for an innovative development system, covering design decisions, scalability, and long-term maintainability.</span>
+      <span class="lang-fr"><b>Architecture &amp; Conception de systèmes :</b> Contribution aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.</span>
+    </li>
+    <li>
+      <span class="lang-en"><b>Embedded &amp; Backend Development:</b> Firmware and backend components in C++ for production deployment. Custom Linux images with Yocto. Signal processing with Boost libraries.</span>
+      <span class="lang-fr"><b>Développement backend &amp; intégré :</b> Micrologiciel et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost.</span>
+    </li>
+    <li>
+      <span class="lang-en"><b>Cross-Platform Systems:</b> Extended a C++/Qt application. Managed multi-platform builds across Linux / Windows / MacOS on ARM and x86 architectures.</span>
+      <span class="lang-fr"><b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.</span>
+    </li>
+    <li>
+      <span class="lang-en"><b>Tooling &amp; Practices:</b> Linux-based development environments with CMake-based build systems. GitLab Administrator. Drove the creation and rollout of GitLab CI/CD pipelines including custom Docker images with Yocto toolchain SDKs. Clean code advocate.</span>
+      <span class="lang-fr"><b>Pratiques d'outillage &amp; :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.</span>
+    </li>
+  </ul>
+</div>
+
+      <div class="exp-entry">
+  <div class="exp-header">
+    <span class="exp-title">
+      <span class="lang-en">Software Engineer</span><span class="lang-fr">Ingénieure Logiciel</span>
+    </span>
+    <span class="exp-dates">
+      <span class="lang-en">April 2021 – September 2023</span><span class="lang-fr">Avril 2021 – Septembre 2023</span>
+    </span>
+  </div>
+  <div class="exp-company"><span class="lang-en"><a href="https://www.spacetek.ch" target="_blank" rel="noopener">Spacetek Technology AG</a> | Switzerland</span><span class="lang-fr"><a href="https://www.spacetek.ch" target="_blank" rel="noopener">Spacetek Technology AG</a> | Suisse</span></div>
+  <ul class="exp-desc">
+    <li>
+      <span class="lang-en">Embedded software development in C and C++ with CMake. Custom Linux images with Yocto. OTA deployment with Mender.</span>
+      <span class="lang-fr">Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.</span>
+    </li>
+    <li>
+      <span class="lang-en">RESTful API development in Go over HTTPS. Data lake management with HDF5.</span>
+      <span class="lang-fr">Développement d'API RESTful dans Go sur HTTPS. Gestion des lacs de données avec HDF5.</span>
+    </li>
+    <li>
+      <span class="lang-en">Real-time signal processing in Python and C++ for noisy signals. SDK development.</span>
+      <span class="lang-fr">Traitement du signal en temps réel dans Python et C++ pour les signaux bruités. Développement SDK.</span>
+    </li>
+    <li>
+      <span class="lang-en">Front-end development with Qt (C++) and Svelte (JavaScript).</span>
+      <span class="lang-fr">Développement front-end avec Qt (C++) et Svelte (JavaScript).</span>
+    </li>
+    <li>
+      <span class="lang-en">Testing with GoogleTest and Pytest. GitLab CI/CD pipelines.</span>
+      <span class="lang-fr">Test avec GoogleTest et Pytest. Canalisations GitLab CI/CD.</span>
+    </li>
+  </ul>
+</div>
+
+      <div class="exp-entry">
+  <div class="exp-header">
+    <span class="exp-title">
+      <span class="lang-en">Research Engineer</span><span class="lang-fr">Ingénieure de Recherche</span>
+    </span>
+    <span class="exp-dates">
+      <span class="lang-en">September 2020 – March 2021</span><span class="lang-fr">Septembre 2020 – Mars 2021</span>
+    </span>
+  </div>
+  <div class="exp-company"><span class="lang-en"><a href="https://www.ottobock.com" target="_blank" rel="noopener">Ottobock</a> | Germany</span><span class="lang-fr"><a href="https://www.ottobock.com" target="_blank" rel="noopener">Ottobock</a> | Allemagne</span></div>
+  <ul class="exp-desc">
+    <li>
+      <span class="lang-en">Closed-loop motor control for high-end prosthetics in C++, Python, and Node.js.</span>
+      <span class="lang-fr">Contrôle moteur en boucle fermée pour prothèses haut de gamme en C++, Python et Node.js.</span>
+    </li>
+    <li>
+      <span class="lang-en">Sensor network data acquisition (temperature, pressure, current via Modbus and I<sup>2</sup>C) with machine-learning-based analysis.</span>
+      <span class="lang-fr">Acquisition de données sur un réseau de capteurs (température, pression, courant via Modbus et I<sup>2</sup>C) avec analyse basée sur le machine learning.</span>
+    </li>
+  </ul>
+</div>
+
+      <div class="exp-entry">
+  <div class="exp-header">
+    <span class="exp-title">
+      <span class="lang-en">Software Engineering Intern</span><span class="lang-fr">Stagiaire Ingénierie Logiciel</span>
+    </span>
+    <span class="exp-dates">
+      <span class="lang-en">February – August 2020</span><span class="lang-fr">Février – Août 2020</span>
+    </span>
+  </div>
+  <div class="exp-company"><span class="lang-en"><a href="https://www.ottobock.com" target="_blank" rel="noopener">Ottobock</a> | Germany</span><span class="lang-fr"><a href="https://www.ottobock.com" target="_blank" rel="noopener">Ottobock</a> | Allemagne</span></div>
+  <ul class="exp-desc">
+    <li>
+      <span class="lang-en">Python GUI for a large-scale 3D printer: extrusion calibration, pressure sensor monitoring, and step motor control via Bluetooth to an ARM M4 microcontroller (C++).</span>
+      <span class="lang-fr">Interface graphique Python pour une imprimante 3D à grande échelle : calibrage de l'extrusion, surveillance du capteur de pression et contrôle du moteur pas à pas via Bluetooth vers un microcontrôleur ARMM4 (C++).</span>
+    </li>
+  </ul>
+</div>
+
+      <div class="exp-entry">
+  <div class="exp-header">
+    <span class="exp-title">
+      <span class="lang-en">Research Intern</span><span class="lang-fr">Stagiaire Chercheuse</span>
+    </span>
+    <span class="exp-dates">
+      <span class="lang-en">April – July 2019</span><span class="lang-fr">Avril – Juillet 2019</span>
+    </span>
+  </div>
+  <div class="exp-company"><span class="lang-en"><a href="https://www.inria.fr" target="_blank" rel="noopener">INRIA</a> – <a href="https://www.lirmm.fr" target="_blank" rel="noopener">LIRMM</a> | France</span><span class="lang-fr"><a href="https://www.inria.fr" target="_blank" rel="noopener">INRIA</a> – <a href="https://www.lirmm.fr" target="_blank" rel="noopener">LIRMM</a> | France</span></div>
+  <ul class="exp-desc">
+    <li>
+      <span class="lang-en">Wearable smartwatch application (Tizen) for data acquisition. Quantification and analysis of Parkinson's-related tremor.</span>
+      <span class="lang-fr">Application smartwatch portable (Tizen) pour l'acquisition de données. Quantification et analyse des tremblements liés à la maladie de Parkinson.</span>
+    </li>
+  </ul>
+</div>
+
+      <!-- Education -->
+      <div class="rsection">
+        <div class="rsection-head">
+          <span class="rsection-bar"></span>
+          <span class="rsection-title">
+            <span class="lang-en">Education</span><span class="lang-fr">Formation</span>
+          </span>
+        </div>
+        <div class="rsection-rule"></div>
+      </div>
+
+      <div class="edu-entry">
+  <div class="edu-header">
+    <span class="edu-degree">
+      <span class="lang-en">M.Eng. Biomedical / Medical Device Engineering</span><span class="lang-fr">M.Eng. Biomédical / Ingénierie des Dispositifs Médicaux</span>
+    </span>
+    <span class="edu-year">2015 – 2020</span>
+  </div>
+  <div class="edu-institution"><span class="lang-en"><a href="https://www.umontpellier.fr" target="_blank" rel="noopener">Montpellier University</a> &nbsp;|&nbsp; France</span><span class="lang-fr"><a href="https://www.umontpellier.fr" target="_blank" rel="noopener">Université de Montpellier</a> &nbsp;|&nbsp; France</span></div>
+  <div class="edu-desc">
+    <span class="lang-en">Master of Engineering in Medical Device Engineering – Digital Sciences for Health. Specialised in Health Device Engineering.</span><span class="lang-fr">Master of Engineering en Ingénierie des Dispositifs Médicaux — Sciences Numériques pour la Santé. Spécialisation en Ingénierie des Dispositifs de Santé.</span>
+  </div>
+</div>
+
+      <div class="edu-entry">
+  <div class="edu-header">
+    <span class="edu-degree">
+      <span class="lang-en">B.Sc. Electronic Engineering</span><span class="lang-fr">Licence Génie Électronique</span>
+    </span>
+    <span class="edu-year">2015 – 2018</span>
+  </div>
+  <div class="edu-institution"><span class="lang-en"><a href="https://www.umontpellier.fr" target="_blank" rel="noopener">Montpellier University</a> &nbsp;|&nbsp; France</span><span class="lang-fr"><a href="https://www.umontpellier.fr" target="_blank" rel="noopener">Université de Montpellier</a> &nbsp;|&nbsp; France</span></div>
+  <div class="edu-desc">
+    <span class="lang-en">Bachelor's degree in Electronic Engineering. Capstone: STM32-controlled spider robot (mechanics, electronics, and firmware).</span><span class="lang-fr">Licence en Génie Électronique. Projet de fin d'études : robot araignée contrôlé par STM32 (mécanique, électronique et firmware).</span>
+  </div>
+</div>
+
+      <div class="edu-entry">
+  <div class="edu-header">
+    <span class="edu-degree">
+      <span class="lang-en">Scientific Baccalaureate</span><span class="lang-fr">Baccalauréat Scientifique</span>
+    </span>
+    <span class="edu-year">2011</span>
+  </div>
+  <div class="edu-institution"><span class="lang-en"><a href="#" target="_blank" rel="noopener">Montpellier</a> &nbsp;|&nbsp; France</span><span class="lang-fr"><a href="#" target="_blank" rel="noopener">Montpellier</a> &nbsp;|&nbsp; France</span></div>
+  <div class="edu-desc">
+    <span class="lang-en">Majoring in Physics and Chemistry.</span><span class="lang-fr">Spécialité Physique et Chimie.</span>
+  </div>
+</div>
+
+      <!-- Certifications -->
+      <div class="rsection">
+        <div class="rsection-head">
+          <span class="rsection-bar"></span>
+          <span class="rsection-title">Certifications</span>
+        </div>
+        <div class="rsection-rule"></div>
+      </div>
+
+      <div class="cert-right-entry">
+  <div class="cert-right-header">
+    <span class="cert-right-title">
+      <span class="lang-en"><a href="https://certificates.future-network-cert.com/56605bf8-3f87-4795-b6a8-a35f88ad6722#acc.14ITxLiW" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">iSAQB&reg; Certified Professional for Software Architecture</a></span>
+      <span class="lang-fr"><a href="https://certificates.future-network-cert.com/56605bf8-3f87-4795-b6a8-a35f88ad6722#acc.14ITxLiW" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">iSAQB® Professionnelle Certifiée en Architecture Logicielle</a></span>
+    </span>
+    <span class="cert-right-date">
+      <span class="lang-en">September 2024</span><span class="lang-fr">Septembre 2024</span>
+    </span>
+  </div>
+  <div class="cert-right-sub">
+    <a href="https://www.isaqb.org/certifications/cpsa-certifications/cpsa-foundation-level/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted);"><span class="lang-en">Foundation Level (CPSA-F)</span><span class="lang-fr">Niveau Fondation (CPSA-F)</span></a>
+  </div>
+  <ul class="cert-right-desc">
+    <li>
+      <span class="lang-en">Software architecture basics and the role and tasks of software architects</span>
+      <span class="lang-fr">Les bases de l'architecture logicielle et le rôle et les tâches des architectes logiciels</span>
+    </li>
+    <li>
+      <span class="lang-en">Architecture requirements, architecture goals, and non-functional quality goals</span>
+      <span class="lang-fr">Les exigences d'architecture, les objectifs d'architecture et les objectifs de qualité non fonctionnels</span>
+    </li>
+    <li>
+      <span class="lang-en">Components, building blocks, interfaces, and dependencies</span>
+      <span class="lang-fr">Composants, blocs de construction, interfaces et dépendances</span>
+    </li>
+    <li>
+      <span class="lang-en">Cross-cutting concerns and technical concepts</span>
+      <span class="lang-fr">Préoccupations transversales et concepts techniques</span>
+    </li>
+    <li>
+      <span class="lang-en">Documentation and communication of architectures</span>
+      <span class="lang-fr">Documentation et communication des architectures</span>
+    </li>
+  </ul>
+</div>
+
+      <!-- Hobbies -->
+      <div class="rsection">
+        <div class="rsection-head">
+          <span class="rsection-bar"></span>
+          <span class="rsection-title">
+            <span class="lang-en">Hobbies</span><span class="lang-fr">Loisirs</span>
+          </span>
+        </div>
+        <div class="rsection-rule"></div>
+      </div>
+      <p class="small-text" style="margin-top:6px;">
+        <span class="lang-en">Rock Climbing &middot;  Hiking &middot;  Skiing / Snowboarding &middot;  Drums</span>
+        <span class="lang-fr">Escalade &nbsp;·&nbsp; Randonnée &nbsp;·&nbsp; Ski / Snowboard &nbsp;·&nbsp; Batterie</span>
+      </p>
+
+      <!-- Other -->
+      <div class="rsection">
+        <div class="rsection-head">
+          <span class="rsection-bar"></span>
+          <span class="rsection-title">
+            <span class="lang-en">Other</span><span class="lang-fr">Autres</span>
+          </span>
+        </div>
+        <div class="rsection-rule"></div>
+      </div>
+      <p class="small-text" style="margin-top:6px;">
+        <span class="lang-en"><b>Nationalities:</b> France, New Zealand, United States of America.<br/><b>Permits:</b> Driver's Licence.</span>
+        <span class="lang-fr"><b>Nationalités :</b> France, Nouvelle-Zélande, États-Unis d'Amérique.<br/><b>Permis :</b> Permis de conduire.</span>
+      </p>
+
+    </main>
+  </div><!-- .body -->
+
+</div><!-- .page -->
+
+  <div id="inapp-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#12343B;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9pt;padding:12px 16px;z-index:9999;align-items:center;justify-content:space-between;gap:12px;">
+    <span>To save as PDF, open this page in your browser &#x2197;</span>
+    <button onclick="document.getElementById('inapp-banner').style.display='none'" style="background:transparent;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:9pt;white-space:nowrap;">Got it</button>
+  </div>
+
+<script>
+  let currentLang = 'en';
+  function downloadPDF() {
+    const ua = navigator.userAgent || '';
+    const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
+    if (inApp) {
+      const banner = document.getElementById('inapp-banner');
+      banner.style.display = 'flex';
+    } else {
+      window.print();
+    }
+  }
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'fr' : 'en';
+    if (currentLang === 'fr') {
+      document.querySelectorAll('.lang-fr').forEach(el => { el.style.display = 'inline'; });
+      document.querySelectorAll('.lang-en').forEach(el => { el.style.display = 'none'; });
+    } else {
+      document.querySelectorAll('.lang-en').forEach(el => { el.style.display = ''; });
+      document.querySelectorAll('.lang-fr').forEach(el => { el.style.display = ''; });
+    }
+    document.getElementById('lang-btn').textContent = currentLang === 'en' ? 'FR' : 'EN';
+    document.documentElement.lang = currentLang;
+  }
+</script>
+</body>
+</html>
