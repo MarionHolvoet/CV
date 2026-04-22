@@ -334,10 +334,10 @@ FR = {
     "cert_date_fr": "Délivré : Septembre 2024",
     # skills / traits (order-matched to EN list)
     "skills_fr": [
-        "C++ / Go / Python / JavaScript",
+        "C++ / Go / Python",
         "Architecture logicielle",
         "Conception du système",
-        "Embedded Linux / ARM / x86",
+        "Embedded Linux",
         "CMake / Git / Docker",
         "Yocto / Mender",
         "REST API / HTTPS",
@@ -1379,6 +1379,7 @@ def render_html(data: dict) -> str:
   }}
 </script>
 </body>
+
 </html>"""
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
