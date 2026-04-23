@@ -346,8 +346,8 @@ FR = {
         "GitHub Copilot",
     ],
     "traits_fr": [
-        "Penseuse positive",
-        "Esprit orientée solutions",
+        "Esprit positive",
+        "Orientée solution",
         "Indépendante et travailleuse",
         "Communicatrice claire",
         "Apprentissage rapide",
