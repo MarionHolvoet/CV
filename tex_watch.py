@@ -1357,7 +1357,7 @@ def render_html(data: dict) -> str:
   let currentLang = 'en';
   function downloadPDF() {{
     const ua = navigator.userAgent || '';
-    const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\/|MicroMessenger/.test(ua);
+    const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Twitter|Snapchat|Line\//|MicroMessenger/.test(ua);
     if (inApp) {{
       const banner = document.getElementById('inapp-banner');
       banner.style.display = 'flex';
