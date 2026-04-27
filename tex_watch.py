@@ -334,15 +334,15 @@ FR = {
     "cert_date_fr": "Délivré : Septembre 2024",
     # skills / traits (order-matched to EN list)
     "skills_fr": [
-        "C++ / Go / Python",
-        "Architecture logicielle",
-        "Conception du système",
+        "C++ | Go | Python | OOP",
+        "Architecture logicielle | arc42",
+        "Conception du système | UML",
         "Embedded Linux",
-        "CMake / Git / Docker",
-        "Yocto / Mender",
-        "REST API / HTTPS",
-        "GoogleTest / Pytest / CI/CD",
-        "Qt / Svelte / HDF5",
+        "CMake | Git | Docker",
+        "Yocto | Mender",
+        "REST API | HTTPS",
+        "GoogleTest | Pytest | CI|CD",
+        "Qt | Svelte | HDF5",
         "GitHub Copilot",
     ],
     "traits_fr": [
@@ -382,7 +382,7 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture &amp; Conception de systèmes :</b> Contribution active aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
+            "<b>Architecture &amp; Conception de systèmes :</b> Contribution active aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture arc42 pour un système de développement innovant, couvrant les décisions de conception, l'évolutivité et la maintenabilité à long terme.",
             "<b>Développement backend &amp; intégré :</b> Micrologiciel et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost et Eigen.",
             "<b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
             "<b>Pratiques d'outillage &amp; :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
