@@ -55,7 +55,7 @@ GLOSSARY_TERMS = [
     "Yocto", "Mender", "Perforce", "REST API", "HTTPS", "HDF5",
     "GoogleTest", "Pytest", "CI/CD", "Qt", "Svelte", "GitHub Copilot",
     "Boost", "Embedded Linux", "ARM", "x86", "Linux", "MacOS", "Windows", "OTA",
-    "Tizen", "Node.js", "Modbus", "STM32", "SDK", "I2C",
+    "Tizen", "Node.js", "Modbus", "STM32", "SDK", "I2C", "OOP", "UML", "arc42",
 ]
 
 # Masculine → feminine corrections applied after every translation.
