@@ -343,7 +343,6 @@ FR = {
         "REST API | HTTPS",
         "GoogleTest | Pytest | CI|CD",
         "Qt | Svelte | HDF5",
-        "GitHub Copilot",
     ],
     "traits_fr": [
         "Esprit positive",
@@ -383,7 +382,7 @@ FR = {
     "exp_items_fr": {
         "Metrolab Technology SA": [
             "<b>Architecture &amp; Conception de systèmes :</b> Contribution active aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture arc42 pour un système de développement innovant, décrivant les décisions de conception clés et l'évolutivité, soutenu par des diagrammes UML clairs.",
-            "<b>Développement backend &amp; intégré :</b> Micrologiciel et composants backend dans C++ pour le déploiement en production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost et Eigen.",
+            "<b>Développement backend &amp; intégré :</b> Conception et construction de la couche de contrôle logiciel pour un magnétomètre optique quantique, fournissant l'orchestration, la communication matérielle, les interfaces REST/SCPI, la découverte de services, le contrôle de concurrence, les tests de bout en bout et le CI/CD de qualité production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost et Eigen.",
             "<b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
             "<b>Pratiques d'outillage &amp; :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
         ],
