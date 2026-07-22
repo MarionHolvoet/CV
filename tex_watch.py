@@ -381,10 +381,12 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "<b>Architecture &amp; Conception de systèmes :</b> Contribution active aux discussions sur l'architecture logicielle. Rédaction d'un document d'architecture arc42 pour un système de développement innovant, décrivant les décisions de conception clés et l'évolutivité, soutenu par des diagrammes UML clairs.",
-            "<b>Développement backend &amp; intégré :</b> Conception et construction de la couche de contrôle logiciel pour un magnétomètre optique quantique, fournissant l'orchestration, la communication matérielle, les interfaces REST/SCPI, la découverte de services, le contrôle de concurrence, les tests de bout en bout et le CI/CD de qualité production. Images Linux personnalisées avec Yocto. Traitement du signal avec les bibliothèques Boost et Eigen.",
-            "<b>Systèmes multiplateformes :</b> Extension d'une application C++/Qt. Gestion des builds multiplateformes sur Linux / Windows / MacOS sur les architectures ARM et x86.",
-            "<b>Pratiques d'outillage &amp; :</b> Environnements de développement basés sur Linux avec des systèmes de construction basés sur CMake. Administratrice GitLab. Pilotage de la création et du déploiement de pipelines GitLab CI/CD, y compris des images Docker personnalisées avec la chaîne d'outils Yocto SDKs. Défenseure du code propre.",
+            "Contribution à l'architecture logicielle et à la conception du système. Rédaction de la documentation sur l'architecture arc42 pour une nouvelle plate-forme de développement, définissant les décisions architecturales, les limites du système, les stratégies d'évolutivité et les modèles de conception basés sur UML.",
+            "Conception de la couche de contrôle logiciel pour un magnétomètre optique quantique, mise en œuvre de l'orchestration, de la communication des appareils, des interfaces REST/SCPI, de la découverte de services, du contrôle de concurrence, des tests de bout en bout et de l'intégration CI/CD.",
+            "Développer des systèmes embarqués Linux en utilisant Yocto. Implémentation de la fonctionnalité de traitement du signal dans C++ en utilisant Boost et Eigen.",
+            "Extension et maintenance d'une application multiplateforme C++/Qt et gestion des versions pour Linux, Windows et macOS sur les architectures ARM et x86.",
+            "Conception et maintenance de l'infrastructure GitLab CI/CD, création d'environnements de construction basés sur Docker à partir des chaînes d'outils Yocto SDK pour automatiser les versions et les tests de logiciels reproductibles.",
+            "Travaillé dans des environnements de développement basés sur Linux avec des systèmes de construction CMake, en appliquant un code propre et les meilleures pratiques d'ingénierie logicielle.",
         ],
         "Spacetek Technology AG": [
             "Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
