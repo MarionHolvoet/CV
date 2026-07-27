@@ -381,12 +381,11 @@ FR = {
     # full bullet FR translations (list-index matched per company)
     "exp_items_fr": {
         "Metrolab Technology SA": [
-            "Contribution à l'architecture logicielle et à la conception du système. Rédaction de la documentation sur l'architecture arc42 pour une nouvelle plate-forme de développement, définissant les décisions architecturales, les limites du système, les stratégies d'évolutivité et les modèles de conception basés sur UML.",
-            "Conception de la couche de contrôle logiciel pour un magnétomètre optique quantique, mise en œuvre de l'orchestration, de la communication des appareils, des interfaces REST/SCPI, de la découverte de services, du contrôle de concurrence, des tests de bout en bout et de l'intégration CI/CD.",
+            "Contribution à l'architecture logicielle et à la conception de systèmes en rédigeant une documentation d'architecture arc42 pour une nouvelle plate-forme de développement, en définissant les décisions architecturales, les limites du système, les stratégies d'évolutivité et les modèles de conception basés sur UML.",
+            "Conception de la couche de contrôle logiciel pour un magnétomètre optique quantique, mise en œuvre de l'orchestration des appareils, du verrouillage exclusif des ressources, des REST API avec événements envoyés par le serveur (SSE), de la découverte de services Avahi, de la concurrence sans verrouillage, des tests de bout en bout et de l'automatisation CI/CD.",
             "Développer des systèmes embarqués Linux en utilisant Yocto. Implémentation de la fonctionnalité de traitement du signal dans C++ en utilisant Boost et Eigen.",
-            "Extension et maintenance d'une application multiplateforme C++/Qt et gestion des versions pour Linux, Windows et macOS sur les architectures ARM et x86.",
-            "Conception et maintenance de l'infrastructure GitLab CI/CD, création d'environnements de construction basés sur Docker à partir des chaînes d'outils Yocto SDK pour automatiser les versions et les tests de logiciels reproductibles.",
-            "Travaillé dans des environnements de développement basés sur Linux avec des systèmes de construction CMake, en appliquant un code propre et les meilleures pratiques d'ingénierie logicielle.",
+            "Extension et maintenance d'une application multiplateforme C++/Qt, prenant en charge Linux, Windows et macOS sur les architectures ARM et x86.",
+            "Conception et maintenance des pipelines GitLab CI/CD, créant des environnements de construction basés sur Docker à partir des chaînes d'outils Yocto SDK pour des constructions reproductibles et des tests automatisés.",
         ],
         "Spacetek Technology AG": [
             "Développement de logiciels embarqués en C et C++ avec CMake. Images Linux personnalisées avec Yocto. Déploiement OTA avec Mender.",
